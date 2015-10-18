@@ -17,7 +17,7 @@ State of the Art
 
 The existence of this library is justified, as state of the art libraries are deficient.
 
-* [node-mocks-http (a.k.a. express-mocks-http)](https://github.com/howardabrams/node-mocks-http)
+* [node-mocks-http](https://github.com/howardabrams/node-mocks-http) (a.k.a. express-mocks-http)
     * Does not support Express 4.
 * [mock-express-request](https://github.com/lykmapipo/mock-express-request) + [mock-express-response](https://github.com/lykmapipo/mock-express-response)
     * Unit testing requires both a fake request and response.  Should be a single library.
