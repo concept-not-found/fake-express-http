@@ -1,0 +1,33 @@
+{
+  "name": "fake-express-http",
+  "version": "0.0.0",
+  "description": "Fake Express HttpRequest and HttpResponse for unit testing.",
+  "main": "fake-http.js",
+  "scripts": {
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --reporter spec --recursive",
+    "send-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/concept-not-found/fake-express-http"
+  },
+  "keywords": [
+    "fake",
+    "express",
+    "http"
+  ],
+  "author": "Ronald Chen",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/concept-not-found/fake-express-http/issues"
+  },
+  "homepage": "https://github.com/concept-not-found/fake-express-http",
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "co-mocha": "^1.1.2",
+    "coveralls": "^2.11.4",
+    "istanbul": "^0.3.22",
+    "mocha": "^2.3.3",
+    "mocha-lcov-reporter": "^1.0.0"
+  }
+}
