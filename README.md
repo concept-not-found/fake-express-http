@@ -22,4 +22,4 @@ The existence of this library is justified, as state of the art libraries are de
 * [mock-express-request](https://github.com/lykmapipo/mock-express-request) + [mock-express-response](https://github.com/lykmapipo/mock-express-response)
     * Unit testing requires both a fake request and response.  Should be a single library.
     * [Node.js Stream API](https://nodejs.org/api/stream.html) callback style events are exposed to allow for asynchronous testing.
-    * As a result does not support promises and has a leaky abstraction of a `finish` event.
+    * As a result does not support promises and has a leaky abstraction with a Stream API `finish` event.
