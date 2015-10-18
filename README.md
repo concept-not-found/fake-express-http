@@ -17,8 +17,9 @@ State of the Art
 
 The existence of this library is justified, as state of the art libraries are deficient.
 
-* [node-mocks-http](https://github.com/howardabrams/node-mocks-http) (a.k.a. express-mocks-http)
+* [node-mocks-http](https://github.com/howardabrams/node-mocks-http) (AKA express-mocks-http)
     * Does not support Express 4.
 * [mock-express-request](https://github.com/lykmapipo/mock-express-request) + [mock-express-response](https://github.com/lykmapipo/mock-express-response)
     * Unit testing requires both a fake request and response.  Should be a single library.
-    * Does not support asynchronous functions.
+    * [Node.js Stream API](https://nodejs.org/api/stream.html) callback style events are exposed to allow for asynchronous testing.
+    * As a result does not support promises and has a leaky abstraction of a `finish` event.
