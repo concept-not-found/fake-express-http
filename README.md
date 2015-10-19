@@ -5,6 +5,8 @@ Fake Express HttpRequest and HttpResponse for unit testing.  Supports Express 4,
 
 Supports asynchronous functions by returning a promise from `response.onEnd()`.
 
+Includes fake and real tests using same controllers to ensure fake is accurate.
+
 What is a Fake?
 ---------------
 

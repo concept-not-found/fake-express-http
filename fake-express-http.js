@@ -1,9 +1,20 @@
 'use strict';
 
+class FakeExpressHttp {
+  constructor() {
+    this.request = new FakeHttpRequest();
+    this.response = new FakeHttpResponse();
+    this.nextArguments = undefined;
+    this.next = () => {
+      this.nextArguments = arguments;
+    };
+  }
+}
+
 class FakeHttpRequest {
   constructor() {
     this.method = 'GET';
-    this.url = undefined;
+    this.url = '/';
     this.headers = {};
   }
 
@@ -57,7 +68,4 @@ class FakeHttpResponse {
   }
 }
 
-module.exports = {
-  FakeHttpRequest,
-  FakeHttpResponse
-};
+module.exports = FakeExpressHttp;
