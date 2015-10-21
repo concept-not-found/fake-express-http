@@ -2,6 +2,10 @@
 
 module.exports = (router) => {
   router.get('/status', (request, response) => {
+    response.status(203).end();
+  });
+
+  router.get('/send-status', (request, response) => {
     response.sendStatus(204);
   });
 
@@ -11,7 +15,7 @@ module.exports = (router) => {
     });
   });
 
-  router.post('/echo-json', (request, response) => {
+  router.post('/post-json', (request, response) => {
     response.json(request.body);
   });
 

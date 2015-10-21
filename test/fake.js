@@ -10,11 +10,22 @@ const FakeExpressHttp = require('../fake-express-http');
 const controllerFactory = require('../controller');
 
 describe('fake', () => {
-  it('has a response.sendStatus', function *() {
+  it('has a response.status', function *() {
     const controller = controllerFactory(express.Router());
 
     const http = new FakeExpressHttp();
     http.request.url = '/status';
+    controller(http.request, http.response, http.next);
+
+    yield http.response.onEnd();
+    expect(http.response.statusCode).to.equal(203);
+  });
+
+  it('has a response.sendStatus', function *() {
+    const controller = controllerFactory(express.Router());
+
+    const http = new FakeExpressHttp();
+    http.request.url = '/send-status';
     controller(http.request, http.response, http.next);
 
     yield http.response.onEnd();
@@ -41,7 +52,7 @@ describe('fake', () => {
 
     const http = new FakeExpressHttp();
     http.request.method = 'POST';
-    http.request.url = '/echo-json';
+    http.request.url = '/post-json';
     http.request.body = {
       message: 'Repeat after me.'
     };

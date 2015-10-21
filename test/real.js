@@ -8,12 +8,21 @@ const request = require('supertest-as-promised');
 const controllerFactory = require('../controller');
 
 describe('real', () => {
-  it('has a response.sendStatus', () => {
+  it('has a response.status', () => {
     const application = express();
     application.use('/', controllerFactory(express.Router()));
 
     return request(application)
       .get('/status')
+      .expect(203);
+  });
+
+  it('has a response.sendStatus', () => {
+    const application = express();
+    application.use('/', controllerFactory(express.Router()));
+
+    return request(application)
+      .get('/send-status')
       .expect(204);
   });
 
@@ -36,7 +45,7 @@ describe('real', () => {
     application.use('/', controllerFactory(express.Router()));
 
     return request(application)
-      .post('/echo-json')
+      .post('/post-json')
       .send({
         message: 'Repeat after me.'
       })
