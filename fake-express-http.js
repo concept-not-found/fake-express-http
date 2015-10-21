@@ -5,7 +5,7 @@ class FakeExpressHttp {
     this.request = new FakeHttpRequest();
     this.response = new FakeHttpResponse();
     this.next = () => {
-      throw new Error(`unexpected ${arguments}`);
+      throw new Error(`unexpected call to next with ${JSON.stringify(arguments)}`);
     };
   }
 }
@@ -18,7 +18,7 @@ class FakeHttpRequest {
   }
 
   is(expectedContentType) {
-    return this.headers['Content-Type'] === expectedContentType;
+    return this.headers['content-type'] === expectedContentType ? expectedContentType : false;
   }
 }
 
@@ -43,12 +43,12 @@ class FakeHttpResponse {
   }
 
   send(data) {
-    this.content = data;
+    this.content = data.toString();
     this.end();
   }
 
   json(document) {
-    this.headers['Content-Type'] = 'application/json';
+    this.headers['content-type'] = 'application/json';
     this.content = JSON.stringify(document);
     this.end();
   }

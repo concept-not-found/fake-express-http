@@ -48,6 +48,17 @@ describe('real', () => {
       }));
   });
 
+  it('has a request.is', () => {
+    const application = express();
+    application.use('/', controllerFactory(express.Router()));
+
+    return request(application)
+      .post('/is')
+      .type('made/up')
+      .send('')
+      .expect('made/up');
+  });
+
   it('has a request.body with parsed json', () => {
     const application = express();
     application.use(bodyParser.json());

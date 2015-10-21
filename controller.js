@@ -19,6 +19,10 @@ module.exports = (router) => {
     });
   });
 
+  router.post('/is', (request, response) => {
+    response.send(request.is('made/up'));
+  });
+
   router.post('/post-json', (request, response) => {
     response.json(request.body);
   });

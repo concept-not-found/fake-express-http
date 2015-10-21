@@ -52,10 +52,23 @@ describe('fake', () => {
 
     yield http.response.onEnd();
     expect(http.response.statusCode).to.equal(200);
-    expect(http.response.headers['Content-Type']).to.equal('application/json');
+    expect(http.response.headers['content-type']).to.equal('application/json');
     expect(http.response.content).to.equal(JSON.stringify({
       content: 'I am a JSON document.'
     }));
+  });
+
+  it('has a request.is', function *() {
+    const controller = controllerFactory(express.Router());
+
+    const http = new FakeExpressHttp();
+    http.request.method = 'POST';
+    http.request.url = '/is';
+    http.request.headers['content-type'] = 'made/up';
+    controller(http.request, http.response, http.next);
+
+    yield http.response.onEnd();
+    expect(http.response.content).to.equal('made/up');
   });
 
   it('has a request.body with parsed json', function *() {
@@ -71,7 +84,7 @@ describe('fake', () => {
 
     yield http.response.onEnd();
     expect(http.response.statusCode).to.equal(200);
-    expect(http.response.headers['Content-Type']).to.equal('application/json');
+    expect(http.response.headers['content-type']).to.equal('application/json');
     expect(http.response.content).to.equal(JSON.stringify({
       message: 'Repeat after me.'
     }));
