@@ -27,7 +27,7 @@ class FakeHttpResponse {
   constructor() {
     this.headers = {};
     this.statusCode = 200;
-    this.data = undefined;
+    this.content = undefined;
     this.endPromise = new Promise((resolve) => {
       this.resolveEnd = resolve;
     });
@@ -44,18 +44,18 @@ class FakeHttpResponse {
   }
 
   body(data) {
-    this.data = data;
+    this.content = data;
     this.end();
   }
 
   send(data) {
-    this.data = data;
+    this.content = data;
     this.end();
   }
 
   json(document) {
     this.headers['Content-Type'] = 'application/json';
-    this.data = document;
+    this.content = JSON.stringify(document);
     this.end();
   }
 
