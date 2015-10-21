@@ -9,6 +9,10 @@ module.exports = (router) => {
     response.sendStatus(204);
   });
 
+  router.get('/send', (request, response) => {
+    response.send('Send it my way.');
+  });
+
   router.get('/json', (request, response) => {
     response.json({
       content: 'I am a JSON document.'

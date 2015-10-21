@@ -32,6 +32,17 @@ describe('fake', () => {
     expect(http.response.statusCode).to.equal(204);
   });
 
+  it('has a response.send', function *() {
+    const controller = controllerFactory(express.Router());
+
+    const http = new FakeExpressHttp();
+    http.request.url = '/send';
+    controller(http.request, http.response, http.next);
+
+    yield http.response.onEnd();
+    expect(http.response.content).to.equal('Send it my way.');
+  });
+
   it('has a response.json', function *() {
     const controller = controllerFactory(express.Router());
 

@@ -26,6 +26,15 @@ describe('real', () => {
       .expect(204);
   });
 
+  it('has a response.send', () => {
+    const application = express();
+    application.use('/', controllerFactory(express.Router()));
+
+    return request(application)
+      .get('/send')
+      .expect('Send it my way.');
+  });
+
   it('has a response.json', () => {
     const application = express();
     application.use('/', controllerFactory(express.Router()));

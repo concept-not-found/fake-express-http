@@ -42,11 +42,6 @@ class FakeHttpResponse {
     this.end();
   }
 
-  body(data) {
-    this.content = data;
-    this.end();
-  }
-
   send(data) {
     this.content = data;
     this.end();
