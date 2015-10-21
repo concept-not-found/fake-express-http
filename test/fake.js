@@ -10,6 +10,17 @@ const FakeExpressHttp = require('../fake-express-http');
 const controllerFactory = require('../controller');
 
 describe('fake', () => {
+  it('has a response.sendStatus', function *() {
+    const controller = controllerFactory(express.Router());
+
+    const http = new FakeExpressHttp();
+    http.request.url = '/status';
+    controller(http.request, http.response, http.next);
+
+    yield http.response.onEnd();
+    expect(http.response.statusCode).to.equal(204);
+  });
+
   it('has a response.json', function *() {
     const controller = controllerFactory(express.Router());
 

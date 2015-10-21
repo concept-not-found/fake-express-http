@@ -8,7 +8,16 @@ const request = require('supertest-as-promised');
 const controllerFactory = require('../controller');
 
 describe('real', () => {
-  it('has a response.json', function *() {
+  it('has a response.sendStatus', () => {
+    const application = express();
+    application.use('/', controllerFactory(express.Router()));
+
+    return request(application)
+      .get('/status')
+      .expect(204);
+  });
+
+  it('has a response.json', () => {
     const application = express();
     application.use('/', controllerFactory(express.Router()));
 
@@ -21,7 +30,7 @@ describe('real', () => {
       }));
   });
 
-  it('has a request.body with parsed json', function *() {
+  it('has a request.body with parsed json', () => {
     const application = express();
     application.use(bodyParser.json());
     application.use('/', controllerFactory(express.Router()));

@@ -4,9 +4,8 @@ class FakeExpressHttp {
   constructor() {
     this.request = new FakeHttpRequest();
     this.response = new FakeHttpResponse();
-    this.nextArguments = undefined;
     this.next = () => {
-      this.nextArguments = arguments;
+      throw new Error(`unexpected ${arguments}`);
     };
   }
 }
