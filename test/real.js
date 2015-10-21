@@ -48,15 +48,28 @@ describe('real', () => {
       }));
   });
 
-  it('has a request.is', () => {
-    const application = express();
-    application.use('/', controllerFactory(express.Router()));
+  describe('request.is', () => {
+    it('returns the content type on match', () => {
+      const application = express();
+      application.use('/', controllerFactory(express.Router()));
 
-    return request(application)
-      .post('/is')
-      .type('made/up')
-      .send('')
-      .expect('made/up');
+      return request(application)
+        .post('/is')
+        .type('made/up')
+        .send('')
+        .expect('made/up');
+    });
+
+    it('returns false when content type does not match', () => {
+      const application = express();
+      application.use('/', controllerFactory(express.Router()));
+
+      return request(application)
+        .post('/is')
+        .type('not/matching')
+        .send('')
+        .expect('false');
+    });
   });
 
   it('has a request.body with parsed json', () => {

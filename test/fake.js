@@ -58,17 +58,32 @@ describe('fake', () => {
     }));
   });
 
-  it('has a request.is', function *() {
-    const controller = controllerFactory(express.Router());
+  describe('request.is', () => {
+    it('returns the content type on match', function *() {
+      const controller = controllerFactory(express.Router());
 
-    const http = new FakeExpressHttp();
-    http.request.method = 'POST';
-    http.request.url = '/is';
-    http.request.headers['content-type'] = 'made/up';
-    controller(http.request, http.response, http.next);
+      const http = new FakeExpressHttp();
+      http.request.method = 'POST';
+      http.request.url = '/is';
+      http.request.headers['content-type'] = 'made/up';
+      controller(http.request, http.response, http.next);
 
-    yield http.response.onEnd();
-    expect(http.response.content).to.equal('made/up');
+      yield http.response.onEnd();
+      expect(http.response.content).to.equal('made/up');
+    });
+
+    it('returns false when content type does not match', function *() {
+      const controller = controllerFactory(express.Router());
+
+      const http = new FakeExpressHttp();
+      http.request.method = 'POST';
+      http.request.url = '/is';
+      http.request.headers['content-type'] = 'not/matching';
+      controller(http.request, http.response, http.next);
+
+      yield http.response.onEnd();
+      expect(http.response.content).to.equal('false');
+    });
   });
 
   it('has a request.body with parsed json', function *() {
