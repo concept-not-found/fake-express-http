@@ -5,6 +5,7 @@ class FakeExpressHttp {
     this.request = new FakeHttpRequest();
     this.response = new FakeHttpResponse();
     this.next = () => {
+      /* istanbul ignore next */
       throw new Error(`unexpected call to next with ${JSON.stringify(arguments)}`);
     };
   }
