@@ -10,52 +10,73 @@ const FakeExpressHttp = require('../fake-express-http');
 const controllerFactory = require('../controller');
 
 describe('fake', () => {
-  it('has a response.status', function *() {
-    const controller = controllerFactory(express.Router());
+  describe('response.end', () => {
+    it('should return 200', function *() {
+      const controller = controllerFactory(express.Router());
 
-    const http = new FakeExpressHttp();
-    http.request.url = '/status';
-    controller(http.request, http.response, http.next);
+      const http = new FakeExpressHttp();
+      http.request.url = '/end';
+      controller(http.request, http.response, http.next);
 
-    yield http.response.onEnd();
-    expect(http.response.statusCode).to.equal(203);
+      yield http.response.onEnd();
+      expect(http.response.statusCode).to.equal(200);
+    });
   });
 
-  it('has a response.sendStatus', function *() {
-    const controller = controllerFactory(express.Router());
+  describe('response.status', () => {
+    it('should return the status code', function *() {
+      const controller = controllerFactory(express.Router());
 
-    const http = new FakeExpressHttp();
-    http.request.url = '/send-status';
-    controller(http.request, http.response, http.next);
+      const http = new FakeExpressHttp();
+      http.request.url = '/status';
+      controller(http.request, http.response, http.next);
 
-    yield http.response.onEnd();
-    expect(http.response.statusCode).to.equal(204);
+      yield http.response.onEnd();
+      expect(http.response.statusCode).to.equal(203);
+    });
   });
 
-  it('has a response.send', function *() {
-    const controller = controllerFactory(express.Router());
+  describe('response.sendStatus', () => {
+    it('should return the status code', function *() {
+      const controller = controllerFactory(express.Router());
 
-    const http = new FakeExpressHttp();
-    http.request.url = '/send';
-    controller(http.request, http.response, http.next);
+      const http = new FakeExpressHttp();
+      http.request.url = '/send-status';
+      controller(http.request, http.response, http.next);
 
-    yield http.response.onEnd();
-    expect(http.response.content).to.equal('Send it my way.');
+      yield http.response.onEnd();
+      expect(http.response.statusCode).to.equal(204);
+    });
   });
 
-  it('has a response.json', function *() {
-    const controller = controllerFactory(express.Router());
+  describe('response.send', () => {
+    it('should send a body', function *() {
+      const controller = controllerFactory(express.Router());
 
-    const http = new FakeExpressHttp();
-    http.request.url = '/json';
-    controller(http.request, http.response, http.next);
+      const http = new FakeExpressHttp();
+      http.request.url = '/send';
+      controller(http.request, http.response, http.next);
 
-    yield http.response.onEnd();
-    expect(http.response.statusCode).to.equal(200);
-    expect(http.response.headers['content-type']).to.equal('application/json');
-    expect(http.response.content).to.equal(JSON.stringify({
-      content: 'I am a JSON document.'
-    }));
+      yield http.response.onEnd();
+      expect(http.response.content).to.equal('Send it my way.');
+    });
+  });
+
+  describe('response.json', () => {
+    it('should send a json body', function *() {
+      const controller = controllerFactory(express.Router());
+
+      const http = new FakeExpressHttp();
+      http.request.url = '/json';
+      controller(http.request, http.response, http.next);
+
+      yield http.response.onEnd();
+      expect(http.response.statusCode).to.equal(200);
+      expect(http.response.headers['content-type']).to.equal('application/json');
+      expect(http.response.content).to.equal(JSON.stringify({
+        content: 'I am a JSON document.'
+      }));
+    });
   });
 
   describe('request.is', () => {
@@ -86,22 +107,24 @@ describe('fake', () => {
     });
   });
 
-  it('has a request.body with parsed json', function *() {
-    const controller = controllerFactory(express.Router());
+  describe('request.body', () => {
+    it('should contain the result from the body parser', function *() {
+      const controller = controllerFactory(express.Router());
 
-    const http = new FakeExpressHttp();
-    http.request.method = 'POST';
-    http.request.url = '/post-json';
-    http.request.body = {
-      message: 'Repeat after me.'
-    };
-    controller(http.request, http.response, http.next);
+      const http = new FakeExpressHttp();
+      http.request.method = 'POST';
+      http.request.url = '/post-json';
+      http.request.body = {
+        message: 'Repeat after me.'
+      };
+      controller(http.request, http.response, http.next);
 
-    yield http.response.onEnd();
-    expect(http.response.statusCode).to.equal(200);
-    expect(http.response.headers['content-type']).to.equal('application/json');
-    expect(http.response.content).to.equal(JSON.stringify({
-      message: 'Repeat after me.'
-    }));
+      yield http.response.onEnd();
+      expect(http.response.statusCode).to.equal(200);
+      expect(http.response.headers['content-type']).to.equal('application/json');
+      expect(http.response.content).to.equal(JSON.stringify({
+        message: 'Repeat after me.'
+      }));
+    });
   });
 });

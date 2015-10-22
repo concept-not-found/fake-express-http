@@ -1,6 +1,10 @@
 'use strict';
 
 module.exports = (router) => {
+  router.get('/end', (request, response) => {
+    response.end();
+  });
+
   router.get('/status', (request, response) => {
     response.status(203).end();
   });
