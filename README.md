@@ -1,6 +1,8 @@
 Fake Express HTTP
 =================
 
+[![Build Status](https://travis-ci.org/concept-not-found/fake-express-http.svg)](https://travis-ci.org/concept-not-found/fake-express-http)
+
 Fake Express HttpRequest and HttpResponse for unit testing.  Supports Express 4, requires Node 4.x.
 
 Supports asynchronous functions by returning a promise from `response.onEnd()`.
