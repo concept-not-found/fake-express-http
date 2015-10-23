@@ -91,6 +91,28 @@ describe('real', () => {
     });
   });
 
+  describe('request.params', () => {
+    it('should contain the path params', () => {
+      const application = express();
+      application.use(bodyParser.json());
+      application.use('/', controllerFactory(express.Router()));
+
+      return request(application)
+        .get('/params/fred')
+        .expect('fred');
+    });
+
+    it('should be empty when there are no paths', () => {
+      const application = express();
+      application.use(bodyParser.json());
+      application.use('/', controllerFactory(express.Router()));
+
+      return request(application)
+        .get('/no-params')
+        .expect('{}');
+    });
+  });
+
   describe('request.body', () => {
     it('should contain the result from the body parser', () => {
       const application = express();

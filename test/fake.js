@@ -107,6 +107,30 @@ describe('fake', () => {
     });
   });
 
+  describe('request.params', () => {
+    it('should contain the path params', function *() {
+      const controller = controllerFactory(express.Router());
+
+      const http = new FakeExpressHttp();
+      http.request.url = '/params/fred';
+      controller(http.request, http.response, http.next);
+
+      yield http.response.onEnd();
+      expect(http.response.content).to.equal('fred');
+    });
+
+    it('should contain the path params', function *() {
+      const controller = controllerFactory(express.Router());
+
+      const http = new FakeExpressHttp();
+      http.request.url = '/no-params';
+      controller(http.request, http.response, http.next);
+
+      yield http.response.onEnd();
+      expect(http.response.content).to.equal('{}');
+    });
+  });
+
   describe('request.body', () => {
     it('should contain the result from the body parser', function *() {
       const controller = controllerFactory(express.Router());

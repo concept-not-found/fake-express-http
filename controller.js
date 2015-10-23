@@ -5,6 +5,14 @@ module.exports = (router) => {
     response.end();
   });
 
+  router.get('/params/:name', (request, response) => {
+    response.send(request.params.name);
+  });
+
+  router.get('/no-params', (request, response) => {
+    response.send(request.params);
+  });
+
   router.get('/status', (request, response) => {
     response.status(203).end();
   });

@@ -44,7 +44,12 @@ class FakeHttpResponse {
   }
 
   send(data) {
-    this.content = data.toString();
+    if (typeof data === 'string') {
+      this.content = data;
+    } else {
+      this.content = JSON.stringify(data);
+    }
+
     this.end();
   }
 
