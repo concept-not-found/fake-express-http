@@ -1,8 +1,8 @@
 {
   "name": "fake-express-http",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Fake Express HttpRequest and HttpResponse for unit testing.",
-  "main": "fake-http.js",
+  "main": "fake-express-http.js",
   "scripts": {
     "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --reporter spec --recursive",
     "send-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
