@@ -4,9 +4,13 @@ class FakeExpressHttp {
   constructor() {
     this.request = new FakeHttpRequest();
     this.response = new FakeHttpResponse();
-    this.next = () => {
+    this.next = (error) => {
       /* istanbul ignore next */
-      throw new Error(`unexpected call to next with ${JSON.stringify(arguments)}`);
+      if (error instanceof Error) {
+        throw error;
+      } else {
+        throw new Error(`unexpected call to next with ${JSON.stringify(arguments)}`);
+      }
     };
   }
 }
