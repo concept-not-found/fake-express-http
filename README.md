@@ -1,10 +1,9 @@
 Fake Express HTTP
 =================
 
-[![Build Status](https://travis-ci.org/concept-not-found/fake-express-http.svg)](https://travis-ci.org/concept-not-found/fake-express-http)
-[![Coverage Status](https://coveralls.io/repos/concept-not-found/fake-express-http/badge.svg?branch=master&service=github)](https://coveralls.io/github/concept-not-found/fake-express-http?branch=master)
+[![Circle CI](https://circleci.com/gh/concept-not-found/fake-express-http.svg?style=shield)](https://circleci.com/gh/concept-not-found/fake-express-http)
 
-Fake Express HttpRequest and HttpResponse for unit testing.  Supports Express 4, requires Node 4.x.
+Fake Express HttpRequest and HttpResponse for unit testing.  Supports Express 4, requires Node 4.x or newer.
 
 Supports asynchronous functions by returning a promise from `response.onEnd()`.
 

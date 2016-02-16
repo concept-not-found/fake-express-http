@@ -1,75 +1,61 @@
 'use strict';
 
-class FakeExpressHttp {
-  constructor() {
-    this.request = new FakeHttpRequest();
-    this.response = new FakeHttpResponse();
-    this.next = (error) => {
-      /* istanbul ignore next */
-      if (error instanceof Error) {
-        throw error;
-      } else {
-        throw new Error(`unexpected call to next with ${JSON.stringify(arguments)}`);
-      }
-    };
-  }
-}
+module.exports = () => {
+  return {
+    request: FakeHttpRequest(),
+    response: FakeHttpResponse()
+  };
+};
 
-class FakeHttpRequest {
-  constructor() {
-    this.method = 'GET';
-    this.url = '/';
-    this.headers = {};
-  }
-
-  is(expectedContentType) {
-    return this.headers['content-type'] === expectedContentType ? expectedContentType : false;
-  }
-}
-
-class FakeHttpResponse {
-  constructor() {
-    this.headers = {};
-    this.statusCode = 200;
-    this.content = undefined;
-    this.endPromise = new Promise((resolve) => {
-      this.resolveEnd = resolve;
-    });
-  }
-
-  status(statusCode) {
-    this.statusCode = statusCode;
-    return this;
-  }
-
-  sendStatus(statusCode) {
-    this.statusCode = statusCode;
-    this.end();
-  }
-
-  send(data) {
-    if (typeof data === 'string') {
-      this.content = data;
-    } else {
-      this.content = JSON.stringify(data);
+const FakeHttpRequest = () => {
+  return {
+    method: 'GET',
+    url: '/',
+    headers: {},
+    is(expectedContentType) {
+      return this.headers['content-type'] === expectedContentType ? expectedContentType : false;
     }
+  };
+};
 
-    this.end();
-  }
+const FakeHttpResponse = () => {
+  const self = {
+    headers: {},
+    statusCode: 200,
+    content: undefined,
+    status(statusCode) {
+      self.statusCode = statusCode;
+      return self;
+    },
+    sendStatus(statusCode) {
+      self.statusCode = statusCode;
+      self.end();
+    },
+    send(data) {
+      if (typeof data === 'string') {
+        self.content = data;
+      } else {
+        self.content = JSON.stringify(data);
+      }
 
-  json(document) {
-    this.headers['content-type'] = 'application/json';
-    this.content = JSON.stringify(document);
-    this.end();
-  }
+      self.end();
+    },
+    json(document) {
+      self.headers['content-type'] = 'application/json';
+      self.content = JSON.stringify(document);
+      self.end();
+    },
+    end() {
+      setImmediate(self.resolveEnd);
+    },
+    onEnd() {
+      return self.endPromise;
+    }
+  };
 
-  end() {
-    setImmediate(this.resolveEnd);
-  }
+  self.endPromise = new Promise((resolve) => {
+    self.resolveEnd = resolve;
+  });
 
-  onEnd() {
-    return this.endPromise;
-  }
-}
-
-module.exports = FakeExpressHttp;
+  return self;
+};

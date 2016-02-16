@@ -1,11 +1,10 @@
 {
   "name": "fake-express-http",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Fake Express HttpRequest and HttpResponse for unit testing.",
   "main": "fake-express-http.js",
   "scripts": {
-    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --reporter spec --recursive",
-    "send-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
+    "test": "istanbul cover --include-all-sources true ./node_modules/mocha/bin/_mocha -- --reporter spec --recursive"
   },
   "repository": {
     "type": "git",
@@ -25,11 +24,11 @@
   "devDependencies": {
     "chai": "^3.3.0",
     "co-mocha": "^1.1.2",
-    "coveralls": "^2.11.4",
     "express": "^4.13.3",
     "body-parser": "^1.14.1",
     "istanbul": "^0.3.22",
     "mocha": "^2.3.3",
+    "mocha-junit-reporter": "1.9.1",
     "mocha-lcov-reporter": "^1.0.0",
     "supertest": "^1.1.0",
     "supertest-as-promised": "^2.0.2"

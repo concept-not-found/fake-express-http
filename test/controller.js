@@ -1,6 +1,10 @@
 'use strict';
 
-module.exports = (router) => {
+const express = require('express');
+
+module.exports = () => {
+  const router = express.Router();
+
   router.get('/end', (request, response) => {
     response.end();
   });
