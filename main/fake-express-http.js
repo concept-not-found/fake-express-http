@@ -23,6 +23,7 @@ const FakeHttpResponse = () => {
     headers: {},
     statusCode: 200,
     content: undefined,
+    redirectPath: undefined,
     status(statusCode) {
       self.statusCode = statusCode;
       return self;
@@ -38,6 +39,15 @@ const FakeHttpResponse = () => {
         self.content = JSON.stringify(data);
       }
 
+      self.end();
+    },
+    redirect(status, path) {
+      if (!path) {
+        path = status;
+        status = 302;
+      }
+      self.statusCode = status;
+      self.redirectPath = path;
       self.end();
     },
     json(document) {

@@ -1,8 +1,8 @@
 {
   "name": "fake-express-http",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Fake Express HttpRequest and HttpResponse for unit testing.",
-  "main": "fake-express-http.js",
+  "main": "main/fake-express-http.js",
   "scripts": {
     "test": "istanbul cover --include-all-sources true ./node_modules/mocha/bin/_mocha -- --reporter spec --recursive"
   },

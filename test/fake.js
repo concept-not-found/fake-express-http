@@ -3,7 +3,7 @@
 const expect = require('chai').expect;
 require('co-mocha');
 
-const FakeExpressHttp = require('../fake-express-http');
+const FakeExpressHttp = require('../main/fake-express-http');
 
 const Controller = require('./controller');
 
@@ -58,6 +58,32 @@ describe('fake', () => {
 
         yield http.response.onEnd();
         expect(http.response.content).to.equal('Send it my way.');
+      });
+    });
+
+    describe('redirect', () => {
+      it('should redirect temporarily', function *() {
+        const controller = Controller();
+
+        const http = FakeExpressHttp();
+        http.request.url = '/redirect';
+        controller(http.request, http.response);
+
+        yield http.response.onEnd();
+        expect(http.response.statusCode).to.equal(302);
+        expect(http.response.redirectPath).to.equal('Its over there for now.');
+      });
+
+      it('should redirect permanently', function *() {
+        const controller = Controller();
+
+        const http = FakeExpressHttp();
+        http.request.url = '/permanent-redirect';
+        controller(http.request, http.response);
+
+        yield http.response.onEnd();
+        expect(http.response.statusCode).to.equal(301);
+        expect(http.response.redirectPath).to.equal('Its over there forever.');
       });
     });
 

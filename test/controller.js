@@ -29,6 +29,14 @@ module.exports = () => {
     response.send('Send it my way.');
   });
 
+  router.get('/redirect', (request, response) => {
+    response.redirect('Its over there for now.');
+  });
+
+  router.get('/permanent-redirect', (request, response) => {
+    response.redirect(301, 'Its over there forever.');
+  });
+
   router.get('/json', (request, response) => {
     response.json({
       content: 'I am a JSON document.'

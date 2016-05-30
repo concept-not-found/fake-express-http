@@ -53,6 +53,28 @@ describe('real', () => {
       });
     });
 
+    describe('redirect', () => {
+      it('should redirect temporarily', () => {
+        const application = express();
+        application.use('/', Controller());
+
+        return request(application)
+          .get('/redirect')
+          .expect(302)
+          .expect('Location', 'Its over there for now.');
+      });
+
+      it('should redirect permanently', () => {
+        const application = express();
+        application.use('/', Controller());
+
+        return request(application)
+          .get('/permanent-redirect')
+          .expect(301)
+          .expect('Location', 'Its over there forever.');
+      });
+    });
+
     describe('json', () => {
       it('should send a json body', () => {
         const application = express();
