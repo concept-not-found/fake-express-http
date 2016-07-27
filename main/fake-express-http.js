@@ -3,7 +3,12 @@
 module.exports = () => {
   return {
     request: FakeHttpRequest(),
-    response: FakeHttpResponse()
+    response: FakeHttpResponse(),
+    /* istanbul ignore next */
+    next: (error) => {
+      /* istanbul ignore next */
+      throw new Error(`call to next with ${error}`);
+    }
   };
 };
 

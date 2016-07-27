@@ -1,6 +1,6 @@
 {
   "name": "fake-express-http",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Fake Express HttpRequest and HttpResponse for unit testing.",
   "main": "main/fake-express-http.js",
   "scripts": {
