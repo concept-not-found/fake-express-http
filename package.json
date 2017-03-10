@@ -1,10 +1,11 @@
 {
   "name": "fake-express-http",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Fake Express HttpRequest and HttpResponse for unit testing.",
   "main": "main/fake-express-http.js",
   "scripts": {
-    "test": "istanbul cover --include-all-sources true ./node_modules/mocha/bin/_mocha -- --recursive",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch --onlyChanged",
     "lint": "eslint ."
   },
   "repository": {
@@ -24,15 +25,32 @@
   "homepage": "https://github.com/concept-not-found/fake-express-http",
   "devDependencies": {
     "body-parser": "1.14.1",
-    "chai": "3.3.0",
-    "co-mocha": "1.1.2",
-    "eslint": "3.5.0",
+    "eslint": "3.17.1",
     "express": "4.13.3",
-    "istanbul": "0.3.22",
-    "mocha": "2.3.3",
-    "mocha-junit-reporter": "1.9.1",
-    "mocha-lcov-reporter": "1.0.0",
+    "jasmine-reporters": "2.2.0",
+    "jest": "19.0.2",
     "supertest": "1.1.0",
     "supertest-as-promised": "2.0.2"
+  },
+  "dependencies": {
+    "mime": "1.3.4",
+    "verror": "1.9.0"
+  },
+  "jest": {
+    "resetMocks": true,
+    "resetModules": true,
+    "collectCoverageFrom": [
+      "**/*.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "coverage/",
+      "setup-jest.js",
+      "main/test-controller.js"
+    ],
+    "coverageReporters": [
+      "text-summary",
+      "lcov"
+    ],
+    "setupTestFrameworkScriptFile": "./setup-jest.js"
   }
 }

@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 const request = require('supertest-as-promised');
 
-const Controller = require('./controller');
+const Controller = require('./test-controller');
 
 describe('real', () => {
   describe('response', () => {
@@ -72,6 +72,18 @@ describe('real', () => {
           .get('/permanent-redirect')
           .expect(301)
           .expect('Location', 'Its over there forever.');
+      });
+    });
+
+    describe('type', () => {
+      it('should set the content-type', async () => {
+        const application = express();
+        application.use('/', Controller());
+
+        return request(application)
+          .get('/type-png')
+          .expect(200)
+          .expect('Content-Type', 'image/png');
       });
     });
 

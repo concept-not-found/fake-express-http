@@ -37,6 +37,10 @@ module.exports = () => {
     response.redirect(301, 'Its over there forever.');
   });
 
+  router.get('/type-png', (request, response) => {
+    response.type('png').end();
+  });
+
   router.get('/json', (request, response) => {
     response.json({
       content: 'I am a JSON document.'

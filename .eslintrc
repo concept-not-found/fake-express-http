@@ -141,9 +141,14 @@
     "prefer-template": 2,
     "require-yield": 2
   },
+  "parserOptions": {
+    "ecmaVersion": 2017
+  },
   "env": {
     "es6": true,
-    "node": true
+    "node": true,
+    "jest": true,
+    "jasmine": true
   },
   "extends": "eslint:recommended"
 }
