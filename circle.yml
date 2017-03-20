@@ -3,10 +3,6 @@ machine:
     version: 7.7.2
 
 test:
-  override:
-    - mkdir -p $CIRCLE_TEST_REPORTS/mocha
-    - npm test -- --reporter mocha-junit-reporter --reporter-options mochaFile=$CIRCLE_TEST_REPORTS/mocha/results.xml
   post:
     - mv coverage/lcov-report $CIRCLE_ARTIFACTS/coverage
-    - mkdir $CIRCLE_TEST_REPORTS/eslint
     - npm run lint -- --format junit --output-file $CIRCLE_TEST_REPORTS/eslint/results.xml
