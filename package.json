@@ -1,6 +1,6 @@
 {
   "name": "fake-express-http",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Fake Express HttpRequest and HttpResponse for unit testing.",
   "main": "main/fake-express-http.js",
   "scripts": {
@@ -33,7 +33,7 @@
     "supertest-as-promised": "2.0.2"
   },
   "dependencies": {
-    "mime": "1.3.4",
+    "mime": "1.4.1",
     "verror": "1.9.0"
   },
   "jest": {
